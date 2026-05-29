@@ -15,7 +15,7 @@ export function TopBar({
             {subtitle}
           </div>
         )}
-        <h1 className="mt-1 truncate text-2xl font-semibold text-white">
+        <h1 className="mt-1 truncate text-2xl font-semibold text-ink">
           {title}
         </h1>
       </div>
