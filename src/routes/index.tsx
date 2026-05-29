@@ -146,7 +146,7 @@ function OpportunitiesPage() {
                     <TimingBadge timing={o.timing} size="sm" />
                   </td>
                   <td className="px-5 py-4 align-top">
-                    <div className="font-medium text-white group-hover:text-white">
+                    <div className="font-medium text-ink group-hover:text-ink">
                       {o.title}
                     </div>
                   </td>
@@ -223,7 +223,7 @@ function StatCard({
           <span className="h-1.5 w-1.5 rounded-full bg-current opacity-80" />
           {label}
         </span>
-        <span className="font-mono text-3xl font-semibold tabular-nums text-white">
+        <span className="font-mono text-3xl font-semibold tabular-nums text-ink">
           {value}
         </span>
       </div>
