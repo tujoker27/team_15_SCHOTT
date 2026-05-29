@@ -12,6 +12,7 @@ import appCss from "../styles.css?url";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { GlobalHeader } from "@/components/GlobalHeader";
+import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -91,6 +92,7 @@ function RootComponent() {
             </main>
           </div>
         </div>
+        <Toaster theme="dark" position="bottom-right" />
       </SidebarProvider>
     </QueryClientProvider>
   );
