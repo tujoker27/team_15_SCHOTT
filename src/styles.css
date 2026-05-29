@@ -43,6 +43,8 @@
   --color-signal-watch: var(--signal-watch);
   --color-signal-watch-bg: var(--signal-watch-bg);
 
+  --color-nav: var(--nav);
+
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -54,64 +56,64 @@
 
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
   --radius: 0.5rem;
 
-  /* Paper-cool base, technical instrument feel */
-  --background: oklch(0.985 0.004 240);
-  --foreground: oklch(0.18 0.03 250);
-  --ink: oklch(0.18 0.03 250);
-  --ink-soft: oklch(0.42 0.03 250);
+  /* SCHOTT dark corporate palette */
+  --background: #0D1B3E;        /* primary background */
+  --foreground: #FFFFFF;
+  --ink: #FFFFFF;
+  --ink-soft: #A8B8D8;
 
-  --surface: oklch(1 0 0);
-  --surface-2: oklch(0.965 0.006 240);
-  --rule: oklch(0.91 0.01 240);
+  --surface: #112244;            /* cards / secondary background */
+  --surface-2: #0A1628;          /* deeper inset */
+  --rule: #1E3158;
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.03 250);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.03 250);
+  --nav: #0A1628;                /* navigation bar */
 
-  /* SCHOTT deep technical navy */
-  --primary: oklch(0.28 0.07 252);
-  --primary-foreground: oklch(0.985 0.004 240);
+  --card: #112244;
+  --card-foreground: #FFFFFF;
+  --popover: #112244;
+  --popover-foreground: #FFFFFF;
 
-  --secondary: oklch(0.95 0.01 240);
-  --secondary-foreground: oklch(0.22 0.04 252);
+  --primary: #3B5BDB;
+  --primary-foreground: #FFFFFF;
 
-  --muted: oklch(0.95 0.01 240);
-  --muted-foreground: oklch(0.5 0.02 250);
+  --secondary: #1E3158;
+  --secondary-foreground: #FFFFFF;
 
-  /* Cool glass-cyan accent */
-  --accent: oklch(0.62 0.13 215);
-  --accent-foreground: oklch(0.99 0.003 240);
+  --muted: #1E3158;
+  --muted-foreground: #A8B8D8;
 
-  --destructive: oklch(0.55 0.2 28);
-  --destructive-foreground: oklch(0.99 0.003 240);
+  --accent: #3B5BDB;
+  --accent-foreground: #FFFFFF;
 
-  --border: oklch(0.9 0.01 240);
-  --input: oklch(0.9 0.01 240);
-  --ring: oklch(0.62 0.13 215);
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
 
-  /* Signal traffic-light, desaturated technical */
-  --signal-now: oklch(0.5 0.16 28);
-  --signal-now-bg: oklch(0.96 0.04 28);
-  --signal-soon: oklch(0.55 0.13 68);
-  --signal-soon-bg: oklch(0.96 0.05 80);
-  --signal-watch: oklch(0.5 0.08 215);
-  --signal-watch-bg: oklch(0.95 0.03 215);
+  --border: #1E3158;
+  --input: #1E3158;
+  --ring: #3B5BDB;
 
-  --sidebar: oklch(0.22 0.05 252);
-  --sidebar-foreground: oklch(0.92 0.01 240);
-  --sidebar-primary: oklch(0.62 0.13 215);
-  --sidebar-primary-foreground: oklch(0.99 0.003 240);
-  --sidebar-accent: oklch(0.28 0.06 252);
-  --sidebar-accent-foreground: oklch(0.99 0.003 240);
-  --sidebar-border: oklch(0.3 0.05 252);
-  --sidebar-ring: oklch(0.62 0.13 215);
+  /* Traffic-light signals */
+  --signal-now: #22C55E;
+  --signal-now-bg: rgba(34, 197, 94, 0.12);
+  --signal-soon: #F59E0B;
+  --signal-soon-bg: rgba(245, 158, 11, 0.12);
+  --signal-watch: #A8B8D8;
+  --signal-watch-bg: rgba(168, 184, 216, 0.10);
+
+  --sidebar: #0A1628;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: #3B5BDB;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #112244;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #1E3158;
+  --sidebar-ring: #3B5BDB;
 }
 
 @layer base {
@@ -126,7 +128,8 @@
     -webkit-font-smoothing: antialiased;
   }
   h1, h2, h3, h4 {
-    letter-spacing: -0.02em;
+    color: #FFFFFF;
+    letter-spacing: -0.01em;
   }
 }
 
@@ -137,25 +140,35 @@
   .text-ink-soft { color: var(--ink-soft); }
   .bg-surface { background-color: var(--surface); }
   .bg-surface-2 { background-color: var(--surface-2); }
+  .bg-nav { background-color: var(--nav); }
   .border-rule { border-color: var(--rule); }
 
   .badge-now {
     background-color: var(--signal-now-bg);
     color: var(--signal-now);
+    border: 1px solid rgba(34, 197, 94, 0.30);
   }
   .badge-soon {
     background-color: var(--signal-soon-bg);
     color: var(--signal-soon);
+    border: 1px solid rgba(245, 158, 11, 0.30);
   }
   .badge-watch {
     background-color: var(--signal-watch-bg);
     color: var(--signal-watch);
+    border: 1px solid rgba(168, 184, 216, 0.25);
   }
 
   .grid-bg {
     background-image:
-      linear-gradient(to right, oklch(0.9 0.01 240 / 0.5) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(0.9 0.01 240 / 0.5) 1px, transparent 1px);
+      linear-gradient(to right, rgba(30, 49, 88, 0.5) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(30, 49, 88, 0.5) 1px, transparent 1px);
     background-size: 32px 32px;
   }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.45; transform: scale(1.4); }
+  }
+  .pulse-dot { animation: pulse-dot 1.8s ease-in-out infinite; }
 }
