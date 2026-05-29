@@ -1,10 +1,11 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 
 import { useAppMode } from "@/lib/mode";
 
 export function ModeToggle() {
   const mode = useAppMode();
-  const search = useRouterState({ select: (r) => r.location.search as Record<string, unknown> });
+
+
 
   const base =
     "px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] transition-colors rounded-[6px]";
@@ -23,7 +24,6 @@ export function ModeToggle() {
       </Link>
       <Link
         to="/idea-builder"
-        search={search}
         className={`${base} ${mode === "idea-builder" ? active : inactive}`}
         aria-pressed={mode === "idea-builder"}
       >
