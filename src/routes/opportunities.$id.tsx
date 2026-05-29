@@ -33,6 +33,7 @@ function OpportunityDetailPage() {
   const opp = Route.useLoaderData();
   const wl = useWatchlist();
   const status = wl.statusOf(opp.id);
+  const isSaved = Boolean(status);
 
   return (
     <>
@@ -50,7 +51,21 @@ function OpportunityDetailPage() {
           </div>
           <div className="mt-4 flex flex-wrap items-start justify-between gap-6">
             <div className="min-w-0 max-w-2xl">
-              <h2 className="font-display text-3xl leading-tight text-ink md:text-4xl">{opp.title}</h2>
+              <div className="flex items-start gap-3">
+                <h2 className="font-display text-3xl leading-tight text-ink md:text-4xl">{opp.title}</h2>
+                <button
+                  onClick={() => (isSaved ? wl.remove(opp.id) : wl.set(opp.id, "Interesting"))}
+                  className={cn(
+                    "mt-1.5 inline-flex items-center justify-center rounded-full border p-2 transition-colors",
+                    isSaved
+                      ? "border-accent/50 bg-accent/10 text-accent hover:bg-accent/20"
+                      : "border-rule bg-surface text-ink-soft hover:border-ink-soft hover:text-ink",
+                  )}
+                  title={isSaved ? `Saved as ${status}` : "Save opportunity"}
+                >
+                  {isSaved ? <BookmarkCheck className="h-5 w-5" /> : <Bookmark className="h-5 w-5" />}
+                </button>
+              </div>
               <p className="mt-4 text-[15px] leading-relaxed text-ink-soft">{opp.summary}</p>
               <div className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3 text-sm">
                 <Meta label="Demand horizon" value={opp.horizon} />
@@ -66,26 +81,28 @@ function OpportunityDetailPage() {
           </div>
 
           {/* Watchlist */}
-          <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-rule pt-5">
-            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-soft mr-2">
-              {status ? <BookmarkCheck className="inline h-3 w-3 mr-1" /> : <Bookmark className="inline h-3 w-3 mr-1" />}
-              Watchlist:
-            </span>
-            {STATUSES.map((s) => (
-              <button
-                key={s}
-                onClick={() => (status === s ? wl.remove(opp.id) : wl.set(opp.id, s))}
-                className={cn(
-                  "rounded-full border px-3 py-1 text-xs font-medium",
-                  status === s
-                    ? "border-primary bg-primary text-primary-foreground"
-                    : "border-rule bg-surface text-ink-soft hover:border-ink-soft",
-                )}
-              >
-                {s}
-              </button>
-            ))}
-          </div>
+          {isSaved && (
+            <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-rule pt-5">
+              <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-soft mr-2">
+                <BookmarkCheck className="inline h-3 w-3 mr-1" />
+                Watchlist status:
+              </span>
+              {STATUSES.map((s) => (
+                <button
+                  key={s}
+                  onClick={() => (status === s ? wl.remove(opp.id) : wl.set(opp.id, s))}
+                  className={cn(
+                    "rounded-full border px-3 py-1 text-xs font-medium",
+                    status === s
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "border-rule bg-surface text-ink-soft hover:border-ink-soft",
+                  )}
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Why SCHOTT + Why Now */}
