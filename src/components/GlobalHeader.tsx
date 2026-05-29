@@ -5,6 +5,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { SchottLogo } from "@/components/SchottLogo";
 import { feedSignals } from "@/data/signals";
 import { useTheme } from "@/lib/theme";
+import { ModeToggle } from "@/components/ModeToggle";
 
 const UPDATED = "2026-05-28 · 06:21 UTC";
 const UNREAD = 4;
@@ -30,7 +31,8 @@ export function GlobalHeader() {
       </Link>
 
       <div className="ml-auto flex items-center gap-2 md:gap-3">
-        <div className="hidden items-center gap-2 rounded-md border border-white/10 bg-white/5 px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-white/70 md:flex">
+        <ModeToggle />
+        <div className="hidden items-center gap-2 rounded-md border border-white/10 bg-white/5 px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-white/70 lg:flex">
           <span className="h-1.5 w-1.5 rounded-full bg-[#22C55E] opacity-80" />
           Updated {UPDATED}
         </div>
