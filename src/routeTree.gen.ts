@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SourcesRouteImport } from './routes/sources'
 import { Route as SavedRouteImport } from './routes/saved'
+import { Route as IdeaBuilderRouteImport } from './routes/idea-builder'
 import { Route as FeedRouteImport } from './routes/feed'
 import { Route as CompetitorsRouteImport } from './routes/competitors'
 import { Route as BriefingRouteImport } from './routes/briefing'
@@ -25,6 +26,11 @@ const SourcesRoute = SourcesRouteImport.update({
 const SavedRoute = SavedRouteImport.update({
   id: '/saved',
   path: '/saved',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IdeaBuilderRoute = IdeaBuilderRouteImport.update({
+  id: '/idea-builder',
+  path: '/idea-builder',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FeedRoute = FeedRouteImport.update({
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/briefing': typeof BriefingRoute
   '/competitors': typeof CompetitorsRoute
   '/feed': typeof FeedRoute
+  '/idea-builder': typeof IdeaBuilderRoute
   '/saved': typeof SavedRoute
   '/sources': typeof SourcesRoute
   '/opportunities/$id': typeof OpportunitiesIdRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/briefing': typeof BriefingRoute
   '/competitors': typeof CompetitorsRoute
   '/feed': typeof FeedRoute
+  '/idea-builder': typeof IdeaBuilderRoute
   '/saved': typeof SavedRoute
   '/sources': typeof SourcesRoute
   '/opportunities/$id': typeof OpportunitiesIdRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/briefing': typeof BriefingRoute
   '/competitors': typeof CompetitorsRoute
   '/feed': typeof FeedRoute
+  '/idea-builder': typeof IdeaBuilderRoute
   '/saved': typeof SavedRoute
   '/sources': typeof SourcesRoute
   '/opportunities/$id': typeof OpportunitiesIdRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/briefing'
     | '/competitors'
     | '/feed'
+    | '/idea-builder'
     | '/saved'
     | '/sources'
     | '/opportunities/$id'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/briefing'
     | '/competitors'
     | '/feed'
+    | '/idea-builder'
     | '/saved'
     | '/sources'
     | '/opportunities/$id'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/briefing'
     | '/competitors'
     | '/feed'
+    | '/idea-builder'
     | '/saved'
     | '/sources'
     | '/opportunities/$id'
@@ -116,6 +128,7 @@ export interface RootRouteChildren {
   BriefingRoute: typeof BriefingRoute
   CompetitorsRoute: typeof CompetitorsRoute
   FeedRoute: typeof FeedRoute
+  IdeaBuilderRoute: typeof IdeaBuilderRoute
   SavedRoute: typeof SavedRoute
   SourcesRoute: typeof SourcesRoute
   OpportunitiesIdRoute: typeof OpportunitiesIdRoute
@@ -135,6 +148,13 @@ declare module '@tanstack/react-router' {
       path: '/saved'
       fullPath: '/saved'
       preLoaderRoute: typeof SavedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/idea-builder': {
+      id: '/idea-builder'
+      path: '/idea-builder'
+      fullPath: '/idea-builder'
+      preLoaderRoute: typeof IdeaBuilderRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/feed': {
@@ -180,6 +200,7 @@ const rootRouteChildren: RootRouteChildren = {
   BriefingRoute: BriefingRoute,
   CompetitorsRoute: CompetitorsRoute,
   FeedRoute: FeedRoute,
+  IdeaBuilderRoute: IdeaBuilderRoute,
   SavedRoute: SavedRoute,
   SourcesRoute: SourcesRoute,
   OpportunitiesIdRoute: OpportunitiesIdRoute,
@@ -187,3 +208,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
