@@ -11,6 +11,7 @@ import {
 import appCss from "../styles.css?url";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
+import { GlobalHeader } from "@/components/GlobalHeader";
 
 function NotFoundComponent() {
   return (
@@ -51,8 +52,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "SCHOTT Opportunity Intelligence Platform" },
-      { name: "description", content: "AI-powered MedTech opportunity scouting for SCHOTT — evidence-backed, source-traceable, decision-ready." },
+      { title: "SCHOTT | Prometheus — Business Development Intelligence" },
+      { name: "description", content: "Prometheus — SCHOTT's AI Market Hunter for evidence-backed MedTech opportunities, with source traceability and timing classification." },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -81,11 +82,14 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <SidebarProvider>
-        <div className="flex min-h-screen w-full bg-background">
-          <AppSidebar />
-          <main className="flex min-w-0 flex-1 flex-col">
-            <Outlet />
-          </main>
+        <div className="flex min-h-screen w-full flex-col bg-background">
+          <GlobalHeader />
+          <div className="flex flex-1 min-h-0 w-full">
+            <AppSidebar />
+            <main className="flex min-w-0 flex-1 flex-col">
+              <Outlet />
+            </main>
+          </div>
         </div>
       </SidebarProvider>
     </QueryClientProvider>

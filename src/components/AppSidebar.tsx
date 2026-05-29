@@ -6,7 +6,6 @@ import {
   Briefcase,
   Bookmark,
   Database,
-  Sparkles,
 } from "lucide-react";
 
 import {
@@ -43,15 +42,15 @@ export function AppSidebar() {
     <Sidebar collapsible="icon">
       <SidebarHeader className="border-b border-sidebar-border px-4 py-4">
         <div className="flex items-center gap-2.5">
-          <div className="grid h-8 w-8 place-items-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground">
-            <Sparkles className="h-4 w-4" />
+          <div className="grid h-8 w-8 place-items-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground font-mono text-[11px] font-bold">
+            P
           </div>
           <div className="flex flex-col leading-tight group-data-[collapsible=icon]:hidden">
-            <span className="text-[11px] font-mono uppercase tracking-[0.18em] text-sidebar-foreground/60">
+            <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-sidebar-foreground/60">
               SCHOTT
             </span>
             <span className="text-sm font-semibold text-sidebar-foreground">
-              Opportunity Intelligence
+              Prometheus
             </span>
           </div>
         </div>

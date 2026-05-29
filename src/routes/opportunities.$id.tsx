@@ -5,11 +5,12 @@ import { TopBar } from "@/components/TopBar";
 import { TimingBadge } from "@/components/TimingBadge";
 import { ConfidenceDial } from "@/components/ConfidenceDial";
 import { opportunities } from "@/data/opportunities";
+import type { Opportunity, Competency, EvidenceMetric, Source } from "@/data/types";
 import { useWatchlist, type WatchlistStatus } from "@/lib/watchlist";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/opportunities/$id")({
-  loader: ({ params }) => {
+  loader: ({ params }): Opportunity => {
     const opp = opportunities.find((o) => o.id === params.id);
     if (!opp) throw notFound();
     return opp;
@@ -92,7 +93,7 @@ function OpportunityDetailPage() {
           <Panel title="Why relevant to SCHOTT" tag="Capability match">
             <p className="text-sm leading-relaxed text-ink-soft">{opp.whySchott}</p>
             <div className="mt-4 flex flex-wrap gap-1.5">
-              {opp.competencies.map((c) => (
+              {opp.competencies.map((c: Competency) => (
                 <span key={c} className="rounded-md bg-surface-2 px-2 py-1 text-[11px] text-ink">{c}</span>
               ))}
             </div>
@@ -105,7 +106,7 @@ function OpportunityDetailPage() {
         {/* Evidence */}
         <Panel title="Data-driven evidence" tag="What the data shows" className="mt-6">
           <div className="grid grid-cols-2 gap-x-6 gap-y-4 border-b border-rule pb-5 sm:grid-cols-4">
-            {opp.evidence.map((e) => (
+            {opp.evidence.map((e: EvidenceMetric) => (
               <div key={e.label}>
                 <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-soft">{e.label}</div>
                 <div className="mt-1 font-mono text-xl font-semibold tabular-nums text-ink">{e.value}</div>
@@ -118,7 +119,7 @@ function OpportunityDetailPage() {
         {/* Score drivers */}
         <Panel title="Score drivers" tag={`Confidence ${opp.confidence}%`} className="mt-6">
           <ul className="space-y-2 text-sm text-ink-soft">
-            {opp.scoreDrivers.map((d, i) => (
+            {opp.scoreDrivers.map((d: string, i: number) => (
               <li key={i} className="flex items-start gap-2">
                 <span className="mt-2 h-1 w-1 rounded-full bg-accent" />
                 <span>{d}</span>
@@ -141,7 +142,7 @@ function OpportunityDetailPage() {
                 </tr>
               </thead>
               <tbody>
-                {opp.sources.map((s, i) => (
+                {opp.sources.map((s: Source, i: number) => (
                   <tr key={i} className="border-b border-rule/60 last:border-0">
                     <td className="py-3 pr-3 font-mono text-xs text-ink-soft">{s.date}</td>
                     <td className="py-3 pr-3 text-xs text-ink-soft">{s.type}</td>
@@ -162,7 +163,7 @@ function OpportunityDetailPage() {
         {/* Risks */}
         <Panel title="Risks & uncertainties" tag="Read before acting" className="mt-6 mb-12">
           <ul className="space-y-2 text-sm text-ink-soft">
-            {opp.risks.map((r, i) => (
+            {opp.risks.map((r: string, i: number) => (
               <li key={i} className="flex items-start gap-2">
                 <span className="mt-2 h-1 w-1 rounded-full bg-[color:var(--signal-now)]" />
                 <span>{r}</span>
