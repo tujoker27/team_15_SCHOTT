@@ -12,12 +12,12 @@ export const Route = createFileRoute("/opportunities/$id")({
   loader: ({ params }) => {
     const opp = opportunities.find((o) => o.id === params.id);
     if (!opp) throw notFound();
-    return { opp };
+    return opp;
   },
   head: ({ loaderData }) => ({
     meta: [
-      { title: `${loaderData?.opp.title ?? "Opportunity"} — SCHOTT OI` },
-      { name: "description", content: loaderData?.opp.summary ?? "" },
+      { title: `${loaderData?.title ?? "Opportunity"} — SCHOTT OI` },
+      { name: "description", content: loaderData?.summary ?? "" },
     ],
   }),
   component: OpportunityDetailPage,
@@ -29,7 +29,7 @@ export const Route = createFileRoute("/opportunities/$id")({
 const STATUSES: WatchlistStatus[] = ["Interesting", "Monitor", "High Priority", "Not Relevant"];
 
 function OpportunityDetailPage() {
-  const { opp } = Route.useLoaderData();
+  const opp = Route.useLoaderData();
   const wl = useWatchlist();
   const status = wl.statusOf(opp.id);
 
