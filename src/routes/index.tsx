@@ -223,7 +223,7 @@ function StatCard({
           <span className="h-1.5 w-1.5 rounded-full bg-current opacity-80" />
           {label}
         </span>
-        <span className="font-mono text-3xl font-semibold tabular-nums text-white">
+        <span className="font-mono text-3xl font-semibold tabular-nums text-ink">
           {value}
         </span>
       </div>
