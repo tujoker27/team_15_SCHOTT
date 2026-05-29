@@ -146,7 +146,7 @@ function OpportunitiesPage() {
                     <TimingBadge timing={o.timing} size="sm" />
                   </td>
                   <td className="px-5 py-4 align-top">
-                    <div className="font-medium text-white group-hover:text-white">
+                    <div className="font-medium text-ink group-hover:text-ink">
                       {o.title}
                     </div>
                   </td>
